@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Federico De Maio | Portfolio</title>
+    <!-- TAILWIND CDN (v4-2026) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome - icone -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    <script>
+        // Configurazione Tailwind
+        tailwind.config = {
+            content: ["./index.html"],
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0ea5e9',   // blu brillante
+                        dark: '#0f172a'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-zinc-950 text-white">
+
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 w-full bg-zinc-950/90 backdrop-blur-md z-50 border-b border-zinc-800">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold">DeMaio<span class="text-primary">.dev</span></h1>
+            
+            <!-- Desktop menu -->
+            <div class="hidden md:flex gap-8 text-sm font-medium">
+                <a href="#home" class="hover:text-primary transition">Home</a>
+                <a href="#about" class="hover:text-primary transition">Chi Sono</a>
+                <a href="#skills" class="hover:text-primary transition">Skills</a>
+                <a href="#projects" class="hover:text-primary transition">Progetti</a>
+                <a href="#contact" class="hover:text-primary transition">Contatti</a>
+            </div>
+            
+            <!-- Mobile menu button -->
+            <button id="menu-btn" class="md:hidden text-3xl">☰</button>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-zinc-900 px-6 py-4">
+            <a href="#home" class="block py-2 hover:text-primary">Home</a>
+            <a href="#about" class="block py-2 hover:text-primary">Chi Sono</a>
+            <a href="#skills" class="block py-2 hover:text-primary">Skills</a>
+            <a href="#projects" class="block py-2 hover:text-primary">Progetti</a>
+            <a href="#contact" class="block py-2 hover:text-primary">Contatti</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="home" class="min-h-screen flex items-center pt-20">
+        <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-5xl md:text-7xl font-bold leading-tight">
+                    Ciao, sono<br><span class="text-primary">Federico <br> De Maio</span>
+                </h2>
+                <p class="mt-6 text-xl text-zinc-400">Studente all'ultimo anno di un ITI nella sezione informatica</p>
+                <p class="mt-4 text-lg text-zinc-400 max-w-md">Appassionato di sviluppo web, Python, cybersecurity e AI. Sto costruendo il mio futuro da ingegnere del software.</p>
+                
+                <div class="mt-10 flex gap-4">
+                    <a href="#projects" class="bg-primary text-black font-semibold px-8 py-4 rounded-xl hover:bg-sky-400 transition">Vedi i miei progetti →</a>
+                    <a href="#contact" class="border border-white/50 font-semibold px-8 py-4 rounded-xl hover:bg-white/10 transition">Contattami</a>
+                </div>
+                
+                <div class="mt-12 flex gap-6 text-3xl">
+                    <a href="https://github.com/DeMaio-27" target="_blank" class="hover:text-primary"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/federico-de-maio-69b468295" target="_blank" class="hover:text-primary"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            
+            <!-- Foto profilo -->
+            <div class="flex justify-center">
+                <img src="" alt="Foto profilo" 
+                     class="w-80 h-80 object-cover rounded-3xl border-4 border-primary shadow-2xl">
+            </div>
+        </div>
+    </section>
+
+    <!-- CHI SONO -->
+    <section id="about" class="py-24 bg-zinc-900">
+        <div class="max-w-4xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12">Chi Sono</h2>
+            <p class="text-lg text-zinc-300 leading-relaxed text-center max-w-2xl mx-auto">
+                Sto frequentando l'ultimo anno di un istituto tecnico industriale indirizzo informatica a Roma. 
+                Ho già lavorato con Python, Java, HTML/CSS/JS, SQL e basi di reti. 
+                Il mio obiettivo è entrare in Ingegneria Informatica alla Sapienza
+            </p>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="py-24">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12">Skills</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:scale-105 transition">Python</div>
+                <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:scale-105 transition">HTML / CSS / JS</div>
+                <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:scale-105 transition">SQL & Database</div>
+                <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:scale-105 transition">Git & GitHub</div>
+                <!-- Aggiungi altri che conosci -->
+            </div>
+        </div>
+    </section>
+
+    <!-- PROGETTI (placeholder - da aggiornare) -->
+    <section id="projects" class="py-24 bg-zinc-900">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12">Progetti</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-zinc-950 rounded-3xl overflow-hidden">
+                    <img src="https://via.placeholder.com/600x300" class="w-full">
+                    <div class="p-6">
+                        <h3 class="font-semibold text-xl">To-Do List Python</h3>
+                        <p class="text-zinc-400 text-sm mt-2">Gestore compiti con salvataggio JSON</p>
+                    </div>
+                </div>
+                <!-- Aggiungi altri 2-3 placeholder -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTATTI -->
+    <section id="contact" class="py-24">
+        <div class="max-w-2xl mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold mb-8">Contattami</h2>
+            <p class="text-zinc-400 mb-8">Sono aperto a stage estivi prima di iniziare l'università</p>
+            <a href="mailto:federicodemaio2007@gmail.com" class="inline-block bg-primary text-black font-bold text-xl px-12 py-6 rounded-2xl hover:bg-sky-400">Scrivimi una mail →</a>
+        </div>
+    </section>
+
+    <footer class="text-center py-8 text-zinc-500 text-sm">
+        © 2026 Federico De Maio • Built with Tailwind &amp; ❤️
+    </footer>
+
+    <script>
+        // Mobile menu
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scroll per i link
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,168 +1,378 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Federico De Maio | Portfolio</title>
-    <!-- TAILWIND CDN (v4-2026) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome - icone -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    
-    <script>
-        // Configurazione Tailwind
-        tailwind.config = {
-            content: ["./index.html"],
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#0ea5e9',   // blu brillante
-                        dark: '#0f172a'
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Federico De Maio | Portfolio</title>
+<meta name="description" content="Portfolio di Federico De Maio, studente di Ingegneria Informatica a Roma Tre. Full-stack developer, appassionato di networking, database e sistemi digitali.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0e17;
+    --bg-alt:#0f1420;
+    --card:rgba(255,255,255,0.04);
+    --card-border:rgba(255,255,255,0.08);
+    --text:#e6e9f0;
+    --text-dim:#9aa4b8;
+    --accent:#4f8cff;
+    --accent2:#7c5cff;
+    --accent-glow: rgba(79,140,255,0.35);
+    --success:#3ddc97;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;}
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--accent);color:#fff;}
+
+  .bg-grid{
+    position:fixed;inset:0;z-index:-2;
+    background-image:
+      radial-gradient(circle at 20% 20%, var(--accent-glow), transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(124,92,255,0.25), transparent 40%),
+      linear-gradient(var(--bg), var(--bg));
+  }
+  .bg-grid::after{
+    content:'';position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size:40px 40px;
+    mask-image:linear-gradient(to bottom, black, transparent 90%);
+  }
+
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:20px 6%;
+    backdrop-filter:blur(14px);
+    background:rgba(10,14,23,0.65);
+    border-bottom:1px solid var(--card-border);
+  }
+  .logo{font-weight:700;font-size:1.3rem;letter-spacing:-0.5px;}
+  .logo span{color:var(--accent);}
+  nav ul{display:flex;gap:32px;list-style:none;}
+  nav a{font-size:0.95rem;color:var(--text-dim);transition:color .25s;}
+  nav a:hover{color:var(--text);}
+  .nav-toggle{display:none;background:none;border:none;color:var(--text);font-size:1.6rem;cursor:pointer;}
+
+  section{padding:120px 6% 80px;max-width:1200px;margin:0 auto;}
+
+  .hero{
+    min-height:100vh;
+    display:flex;align-items:center;justify-content:space-between;gap:48px;
+    padding-top:100px;flex-wrap:wrap;
+  }
+  .hero-text{flex:1 1 480px;}
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:6px 14px;border-radius:999px;
+    background:rgba(79,140,255,0.12);
+    border:1px solid rgba(79,140,255,0.3);
+    color:var(--accent);font-size:0.82rem;font-weight:500;
+    margin-bottom:24px;
+  }
+  .badge::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--success);box-shadow:0 0 8px var(--success);}
+  .hero h1{font-size:3.4rem;font-weight:700;line-height:1.1;margin-bottom:18px;}
+  .hero h1 .highlight{
+    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p{font-size:1.15rem;color:var(--text-dim);max-width:520px;margin-bottom:36px;}
+  .btn-row{display:flex;gap:16px;flex-wrap:wrap;}
+  .btn{
+    padding:14px 28px;border-radius:12px;font-weight:600;font-size:0.95rem;
+    transition:transform .25s, box-shadow .25s;display:inline-flex;align-items:center;gap:8px;
+  }
+  .btn-primary{
+    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    color:#fff;box-shadow:0 8px 24px var(--accent-glow);
+  }
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 32px var(--accent-glow);}
+  .btn-secondary{
+    background:var(--card);border:1px solid var(--card-border);color:var(--text);
+  }
+  .btn-secondary:hover{background:rgba(255,255,255,0.08);transform:translateY(-3px);}
+
+  .hero-visual{
+    flex:0 0 320px;display:flex;justify-content:center;
+  }
+  .avatar-wrap{
+    position:relative;width:280px;height:280px;border-radius:32px;
+    overflow:hidden;border:1px solid var(--card-border);
+    box-shadow:0 20px 60px rgba(79,140,255,0.25);
+  }
+  .avatar-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
+
+  .section-tag{color:var(--accent);font-weight:600;font-size:0.85rem;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;}
+  .section-title{font-size:2.2rem;font-weight:700;margin-bottom:48px;}
+
+  .about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:start;}
+  .about-grid p{color:var(--text-dim);margin-bottom:16px;font-size:1.02rem;}
+  .facts{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .fact-card{
+    background:var(--card);border:1px solid var(--card-border);
+    border-radius:16px;padding:20px;
+  }
+  .fact-card .num{font-family:'Space Grotesk';font-size:1.6rem;font-weight:700;color:var(--accent);}
+  .fact-card .label{font-size:0.85rem;color:var(--text-dim);margin-top:4px;}
+
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;}
+  .skill-card{
+    background:var(--card);border:1px solid var(--card-border);border-radius:18px;
+    padding:26px;transition:transform .25s, border-color .25s;
+  }
+  .skill-card:hover{transform:translateY(-6px);border-color:var(--accent);}
+  .skill-card h3{font-size:1.1rem;margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+  .skill-card .dot{width:10px;height:10px;border-radius:50%;background:var(--accent2);}
+  .tag-row{display:flex;flex-wrap:wrap;gap:8px;}
+  .tag{
+    font-size:0.78rem;padding:5px 12px;border-radius:999px;
+    background:rgba(255,255,255,0.06);color:var(--text-dim);
+  }
+
+  .timeline{border-left:2px solid var(--card-border);padding-left:32px;display:flex;flex-direction:column;gap:36px;}
+  .tl-item{position:relative;}
+  .tl-item::before{
+    content:'';position:absolute;left:-41px;top:2px;width:16px;height:16px;border-radius:50%;
+    background:var(--bg);border:3px solid var(--accent);
+  }
+  .tl-item .date{color:var(--accent);font-size:0.85rem;font-weight:600;margin-bottom:4px;}
+  .tl-item h3{font-size:1.15rem;margin-bottom:6px;}
+  .tl-item p{color:var(--text-dim);font-size:0.95rem;}
+
+  .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;}
+  .project-card{
+    background:var(--card);border:1px solid var(--card-border);border-radius:20px;
+    padding:28px;display:flex;flex-direction:column;gap:14px;transition:transform .25s,border-color .25s;
+  }
+  .project-card:hover{transform:translateY(-6px);border-color:var(--accent2);}
+  .project-card .icon{font-size:1.8rem;}
+  .project-card h3{font-size:1.2rem;}
+  .project-card p{color:var(--text-dim);font-size:0.92rem;flex:1;}
+  .project-status{
+    align-self:flex-start;font-size:0.75rem;padding:4px 10px;border-radius:999px;font-weight:600;
+  }
+  .status-progress{background:rgba(255,193,7,0.15);color:#ffc107;}
+  .status-soon{background:rgba(158,158,158,0.15);color:#bdbdbd;}
+  .project-card .links{display:flex;gap:14px;font-size:0.85rem;}
+  .project-card .links a{color:var(--accent);font-weight:600;}
+
+  .contact-box{
+    background:var(--card);border:1px solid var(--card-border);border-radius:24px;
+    padding:56px;text-align:center;
+  }
+  .contact-box h2{font-size:2rem;margin-bottom:12px;}
+  .contact-box p{color:var(--text-dim);margin-bottom:32px;}
+  .contact-links{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;}
+  .contact-links a{
+    display:flex;align-items:center;gap:10px;padding:14px 24px;border-radius:12px;
+    background:rgba(255,255,255,0.05);border:1px solid var(--card-border);font-weight:600;font-size:0.95rem;
+    transition:transform .25s, border-color .25s;
+  }
+  .contact-links a:hover{transform:translateY(-3px);border-color:var(--accent);}
+
+  footer{text-align:center;padding:32px 6%;color:var(--text-dim);font-size:0.85rem;border-top:1px solid var(--card-border);}
+
+  @media (max-width:768px){
+    nav{position:fixed;top:70px;right:0;background:var(--bg-alt);flex-direction:column;
+      width:220px;border-radius:0 0 0 16px;border:1px solid var(--card-border);
+      transform:translateX(100%);transition:transform .3s;padding:20px;}
+    nav.open{transform:translateX(0);}
+    nav ul{flex-direction:column;gap:18px;}
+    .nav-toggle{display:block;}
+    .hero h1{font-size:2.4rem;}
+    .about-grid{grid-template-columns:1fr;}
+    .hero{flex-direction:column-reverse;text-align:center;}
+    .hero p{margin:0 auto 36px;}
+    .btn-row{justify-content:center;}
+    .contact-box{padding:32px;}
+  }
+</style>
 </head>
-<body class="bg-zinc-950 text-white">
+<body>
 
-    <!-- NAVBAR -->
-    <nav class="fixed top-0 w-full bg-zinc-950/90 backdrop-blur-md z-50 border-b border-zinc-800">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold">DeMaio<span class="text-primary">.dev</span></h1>
-            
-            <!-- Desktop menu -->
-            <div class="hidden md:flex gap-8 text-sm font-medium">
-                <a href="#home" class="hover:text-primary transition">Home</a>
-                <a href="#about" class="hover:text-primary transition">Chi Sono</a>
-                <a href="#skills" class="hover:text-primary transition">Skills</a>
-                <a href="#projects" class="hover:text-primary transition">Progetti</a>
-                <a href="#contact" class="hover:text-primary transition">Contatti</a>
-            </div>
-            
-            <!-- Mobile menu button -->
-            <button id="menu-btn" class="md:hidden text-3xl">☰</button>
-        </div>
-        
-        <!-- Mobile menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-zinc-900 px-6 py-4">
-            <a href="#home" class="block py-2 hover:text-primary">Home</a>
-            <a href="#about" class="block py-2 hover:text-primary">Chi Sono</a>
-            <a href="#skills" class="block py-2 hover:text-primary">Skills</a>
-            <a href="#projects" class="block py-2 hover:text-primary">Progetti</a>
-            <a href="#contact" class="block py-2 hover:text-primary">Contatti</a>
-        </div>
-    </nav>
+<div class="bg-grid"></div>
 
-    <!-- HERO -->
-    <section id="home" class="min-h-screen flex items-center pt-20">
-        <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-            <div>
-                <h2 class="text-5xl md:text-7xl font-bold leading-tight">
-                    Ciao, sono<br><span class="text-primary">Federico <br> De Maio</span>
-                </h2>
-                <p class="mt-6 text-xl text-zinc-400">Studente all'ultimo anno di un ITI nella sezione informatica</p>
-                <p class="mt-4 text-lg text-zinc-400 max-w-md">Appassionato di sviluppo web, Python, cybersecurity e AI. Sto costruendo il mio futuro da ingegnere del software.</p>
-                
-                <div class="mt-10 flex gap-4">
-                    <a href="#projects" class="bg-primary text-black font-semibold px-8 py-4 rounded-xl hover:bg-sky-400 transition">Vedi i miei progetti →</a>
-                    <a href="#contact" class="border border-white/50 font-semibold px-8 py-4 rounded-xl hover:bg-white/10 transition">Contattami</a>
-                </div>
-                
-                <div class="mt-12 flex gap-6 text-3xl">
-                    <a href="https://github.com/DeMaio-27" target="_blank" class="hover:text-primary"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/federico-de-maio-69b468295" target="_blank" class="hover:text-primary"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-            
-            <!-- Foto profilo -->
-            <div class="flex justify-center">
-                <img src="profe.png" alt="Foto profilo" 
-                     class="w-80 h-80 object-cover rounded-3xl border-4 border-primary shadow-2xl">
-            </div>
-        </div>
-    </section>
+<header>
+  <div class="logo">Federico<span>.dev</span></div>
+  <button class="nav-toggle" id="navToggle" aria-label="menu">&#9776;</button>
+  <nav id="navMenu">
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#path">Percorso</a></li>
+      <li><a href="#projects">Progetti</a></li>
+      <li><a href="#contact">Contatti</a></li>
+    </ul>
+  </nav>
+</header>
 
-    <!-- CHI SONO -->
-    <section id="about" class="py-24 bg-zinc-900">
-        <div class="max-w-4xl mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-12">Chi Sono</h2>
-            <p class="text-lg text-zinc-300 leading-relaxed text-center max-w-2xl mx-auto">
-                Sto frequentando l'ultimo anno di un istituto tecnico industriale indirizzo informatica a Roma. 
-                Ho già lavorato con Python, Java, HTML/CSS/JS, SQL e basi di reti. 
-                Il mio obiettivo è entrare in Ingegneria Informatica alla Sapienza
-            </p>
-        </div>
-    </section>
+<section class="hero" id="home">
+  <div class="hero-text">
+    <div class="badge">Disponibile per stage e collaborazioni</div>
+    <h1>Federico De Maio<br><span class="highlight">Ingegneria Informatica</span></h1>
+    <p>Studente al primo anno di Ingegneria Informatica a Roma Tre. Costruisco applicazioni web full-stack, sistemi con database e progetti pratici di networking, con l'obiettivo di lavorare su sistemi distribuiti e infrastrutture digitali complesse.</p>
+    <div class="btn-row">
+      <a href="#projects" class="btn btn-primary">Guarda i progetti</a>
+      <a href="#contact" class="btn btn-secondary">Contattami</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="avatar-wrap">
+      <img src="profe.png" alt="Foto profilo Federico De Maio">
+    </div>
+  </div>
+</section>
 
-    <!-- SKILLS -->
-    <section id="skills" class="py-24">
-        <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-12">Skills</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:scale-105 transition">Python</div>
-                <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:scale-105 transition">HTML / CSS / JS</div>
-                <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:scale-105 transition">SQL & Database</div>
-                <!-- Aggiungi altri che conosci -->
-            </div>
-        </div>
-    </section>
+<section id="about">
+  <div class="section-tag">Chi sono</div>
+  <h2 class="section-title">About Me</h2>
+  <div class="about-grid">
+    <div>
+      <p>Ho concluso il percorso quinquennale all'Istituto Tecnico Superiore con specializzazione in Informatica e Telecomunicazioni, costruendo solide basi in sviluppo full-stack, progettazione di database e reti di calcolatori.</p>
+      <p>Oggi sono al primo anno di <strong>Ingegneria Informatica</strong> presso l'Università Roma Tre, dove sto approfondendo architetture di sistema, matematica applicata e programmazione avanzata, con l'obiettivo di specializzarmi in sistemi distribuiti, cybersecurity e cloud computing.</p>
+      <p>Durante il percorso scolastico ho lavorato su progetti concreti: piattaforme web con autenticazione, sistemi gestionali scolastici e applicazioni desktop, sempre curando sia il codice che la documentazione e la presentazione del lavoro.</p>
+    </div>
+    <div class="facts">
+      <div class="fact-card"><div class="num">5+</div><div class="label">Linguaggi usati (PHP, JS, SQL, Python, C)</div></div>
+      <div class="fact-card"><div class="num">3</div><div class="label">Repository su GitHub</div></div>
+      <div class="fact-card"><div class="num">1&deg;</div><div class="label">Anno Ingegneria Informatica</div></div>
+      <div class="fact-card"><div class="num">Roma</div><div class="label">Base operativa</div></div>
+    </div>
+  </div>
+</section>
 
-    <!-- PROGETTI (placeholder - da aggiornare) -->
-    <section id="projects" class="py-24 bg-zinc-900">
-        <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-12">Progetti</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-zinc-950 rounded-3xl overflow-hidden">
-                    <img src="https://via.placeholder.com/600x300" class="w-full">
-                    <div class="p-6">
-                        <h3 class="font-semibold text-xl">To-Do List Python</h3>
-                        <p class="text-zinc-400 text-sm mt-2">Coming soon</p>
-                    </div>
-                </div>
-                <!-- Aggiungi altri 2-3 placeholder -->
-            </div>
-        </div>
-    </section>
+<section id="skills">
+  <div class="section-tag">Competenze</div>
+  <h2 class="section-title">Cosa so fare</h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <h3><span class="dot"></span>Web Development</h3>
+      <div class="tag-row">
+        <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span><span class="tag">PHP</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="dot"></span>Database</h3>
+      <div class="tag-row">
+        <span class="tag">SQL</span><span class="tag">MariaDB</span><span class="tag">MySQL</span><span class="tag">Progettazione schema</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="dot"></span>Programmazione</h3>
+      <div class="tag-row">
+        <span class="tag">Python</span><span class="tag">Tkinter</span><span class="tag">Logica algoritmica</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="dot"></span>Reti e Sistemi</h3>
+      <div class="tag-row">
+        <span class="tag">TCP/IP</span><span class="tag">Subnetting</span><span class="tag">VLAN</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="dot"></span>Tools & Ambiente</h3>
+      <div class="tag-row">
+        <span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">VS Code</span><span class="tag">XAMPP</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="dot"></span>Soft Skills</h3>
+      <div class="tag-row">
+        <span class="tag">Problem solving</span><span class="tag">Lavoro in team</span><span class="tag">Presentazioni tecniche</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- CONTATTI -->
-    <section id="contact" class="py-24">
-        <div class="max-w-2xl mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold mb-8">Contattami</h2>
-            <p class="text-zinc-400 mb-8">Sono aperto a stage estivi prima di iniziare l'università</p>
-            <a href="mailto:federicodemaio2007@gmail.com" class="inline-block bg-primary text-black font-bold text-xl px-12 py-6 rounded-2xl hover:bg-sky-400">Scrivimi una mail →</a>
-        </div>
-    </section>
+<section id="path">
+  <div class="section-tag">Percorso</div>
+  <h2 class="section-title">Il mio percorso</h2>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="date">2026 &mdash; oggi</div>
+      <h3>Ingegneria Informatica, Universit&agrave; Roma Tre</h3>
+      <p>Primo anno del corso di laurea, con focus su matematica applicata, architetture di sistema e fondamenti di programmazione avanzata.</p>
+    </div>
+    <div class="tl-item">
+      <div class="date">2021 &ndash; 2026</div>
+      <h3>Diploma ITIS &mdash; Informatica e Telecomunicazioni</h3>
+      <p>Percorso quinquennale con progetti full-stack, reti di calcolatori e basi di dati. Sviluppo di applicazioni web con autenticazione e sistemi gestionali per l'ambiente scolastico.</p>
+    </div>
+    <div class="tl-item">
+      <div class="date">In corso</div>
+      <h3>Obiettivo: stage estivo</h3>
+      <p>Alla ricerca di un'opportunit&agrave; di stage tra il primo e il secondo anno di universit&agrave; per applicare sul campo le competenze in sviluppo software e sistemi.</p>
+    </div>
+  </div>
+</section>
 
-    <footer class="text-center py-8 text-zinc-500 text-sm">
-        © 2026 Federico De Maio • Built with Tailwind &amp; ❤️
-    </footer>
+<section id="projects">
+  <div class="section-tag">Portfolio</div>
+  <h2 class="section-title">Progetti</h2>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="icon">&#128187;</div>
+      <span class="project-status status-progress">In aggiornamento</span>
+      <h3>School Digital Hub</h3>
+      <p>Piattaforma di digitalizzazione scolastica con login basato su ruoli, dashboard personalizzate e backend PHP/MySQL. Attualmente in fase di revisione prima di una nuova pubblicazione.</p>
+      <div class="links">
+        <a href="https://github.com/DeMaio-27" target="_blank">GitHub &rarr;</a>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="icon">&#9989;</div>
+      <span class="project-status status-progress">In aggiornamento</span>
+      <h3>To-Do List App</h3>
+      <p>Applicazione di gestione attivit&agrave; scritta in Python, evoluta da interfaccia a riga di comando a interfaccia grafica con Tkinter.</p>
+      <div class="links">
+        <a href="https://github.com/DeMaio-27" target="_blank">GitHub &rarr;</a>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="icon">&#10024;</div>
+      <span class="project-status status-soon">Prossimamente</span>
+      <h3>Nuovo progetto</h3>
+      <p>Spazio riservato al prossimo progetto in sviluppo. Torna a trovarmi presto per scoprire cosa sto costruendo.</p>
+    </div>
+  </div>
+</section>
 
-    <script>
-        // Mobile menu
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+<section id="contact">
+  <div class="contact-box">
+    <h2>Parliamone</h2>
+    <p>Sono aperto a stage, collaborazioni su progetti e semplici scambi di idee su tecnologia.</p>
+    <div class="contact-links">
+      <a href="https://github.com/DeMaio-27" target="_blank">&#128187; GitHub</a>
+      <a href="mailto:federicodemaio2007@gmail.com">&#9993; Email</a>
+      <a href="https://www.linkedin.com/in/federico-de-maio-69b468295/" target="_blank">&#128188; LinkedIn</a>
+    </div>
+  </div>
+</section>
 
-        // Smooth scroll per i link
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                if (this.getAttribute('href') !== '#') {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    </script>
+<footer>
+  &copy; 2026 Federico De Maio &mdash; Costruito con HTML, CSS e JavaScript, ospitato su GitHub Pages.
+</footer>
+
+<script>
+  document.getElementById('navToggle').addEventListener('click', function(){
+    document.getElementById('navMenu').classList.toggle('open');
+  });
+  document.querySelectorAll('nav a').forEach(function(link){
+    link.addEventListener('click', function(){
+      document.getElementById('navMenu').classList.remove('open');
+    });
+  });
+</script>
+
 </body>
 </html>
